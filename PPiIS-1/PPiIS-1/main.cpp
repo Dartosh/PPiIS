@@ -35,6 +35,9 @@ public:
 
 	virtual const Figure2D& operator+(const Figure2D& r) const = 0; //#1
 	virtual const Figure2D& Intersection(const Figure2D& r) const = 0; //#2
+
+	virtual const Figure2D& operator-(const Figure2D& r) const = 0; //#1
+	virtual const Figure2D& Crossing(const Figure2D& r) const = 0; //#2
 private:
 
 };
@@ -72,6 +75,23 @@ public:
 		return *result;
 	}
 
+	const Figure2D& operator-(const Figure2D& other) const override //#1
+	{
+		Figure2D* result = new Rectangle(*this);
+
+		// Operation...
+
+		return *result;
+	}
+
+	const Figure2D& Crossing(const Figure2D& r) const override // #2
+	{
+		Figure2D* result = new Rectangle(*this);
+
+		// Operation...
+
+		return *result;
+	}
 private:
 	Vector2 _downLeft;
 	Vector2 _topRight;
@@ -87,6 +107,10 @@ int main()
 	const Figure2D& c = a.Intersection(b);
 
 	const Figure2D& d = a + b;
+
+	const Figure2D& e = a.Crossing(b);
+
+	const Figure2D& f = a - b;
 
 	system("pause");
 	return 0;
