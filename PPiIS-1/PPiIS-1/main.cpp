@@ -27,6 +27,22 @@ struct Vector2
 	}
 };
 
+class Figure2D
+{
+public:
+
+private:
+
+};
+
+class Rectangle : public Figure2D
+{
+public:
+
+private:
+
+};
+
 int main()
 {
 
