@@ -30,7 +30,9 @@ struct Vector2
 class Figure2D
 {
 public:
-	virtual void Move(const Vector2& other) = 0;
+	virtual void Move(const Vector2& offset) = 0;
+
+	virtual const Figure2D& operator+(const Figure2D& r) const = 0;
 private:
 
 };
@@ -47,6 +49,15 @@ public:
 	{
 		_downLeft += offset;
 		_topRight += offset;
+	}
+
+	const Figure2D& operator+(const Figure2D& other) const override
+	{
+		Figure2D* result = new Rectangle(*this);
+
+		// Operation...
+
+		return *result;
 	}
 
 private:
