@@ -30,7 +30,7 @@ struct Vector2
 class Figure2D
 {
 public:
-
+	virtual void Move(const Vector2& other) = 0;
 private:
 
 };
@@ -38,9 +38,20 @@ private:
 class Rectangle : public Figure2D
 {
 public:
+	Rectangle(const Vector2& downLeft, const Vector2& topRight) :
+		_downLeft(downLeft),
+		_topRight(topRight)
+	{ }
+
+	void Move(const Vector2& offset) override
+	{
+		_downLeft += offset;
+		_topRight += offset;
+	}
 
 private:
-
+	Vector2 _downLeft;
+	Vector2 _topRight;
 };
 
 int main()
