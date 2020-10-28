@@ -27,15 +27,18 @@ struct Vector2
 	}
 };
 
+
 class Figure2D
 {
 public:
 	virtual void Move(const Vector2& offset) = 0;
 
-	virtual const Figure2D& operator+(const Figure2D& r) const = 0;
+	virtual const Figure2D& operator+(const Figure2D& r) const = 0; //#1
+	virtual const Figure2D& Intersection(const Figure2D& r) const = 0; //#2
 private:
 
 };
+
 
 class Rectangle : public Figure2D
 {
@@ -51,7 +54,16 @@ public:
 		_topRight += offset;
 	}
 
-	const Figure2D& operator+(const Figure2D& other) const override
+	const Figure2D& operator+(const Figure2D& other) const override //#1
+	{
+		Figure2D* result = new Rectangle(*this);
+
+		// Operation...
+
+		return *result;
+	}
+
+	const Figure2D& Intersection(const Figure2D& r) const override // #2
 	{
 		Figure2D* result = new Rectangle(*this);
 
@@ -65,8 +77,16 @@ private:
 	Vector2 _topRight;
 };
 
+
+
 int main()
 {
+	Rectangle a(Vector2(0, 0), Vector2(5, 5));
+	Rectangle b(Vector2(3, 3), Vector2(10, 10));
+
+	const Figure2D& c = a.Intersection(b);
+
+	const Figure2D& d = a + b;
 
 	system("pause");
 	return 0;
